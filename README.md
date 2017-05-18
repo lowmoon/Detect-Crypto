@@ -18,10 +18,16 @@ How to install Detect-Crypto.
 
 
 filegroup.xml - file group template import file
+
 filescreen.xml - file screen template import file 
-psshutdown.exe - called by the .bat script to shutdown the host if file screen is triggered   
+
+psshutdown.exe - called by the .bat script to shutdown the host if file screen is triggered  
+
 Detect-Crypto.ps1 - main script for deploying and updating FSRM and file screens
+
 Detect-Crypto.bat - script FSRM executes when the file screen is triggered
+
 ransomware_identifiers.txt - List of known ransomware extensions and file names. Add new identifiers to this list.
+
 
 
