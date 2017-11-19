@@ -414,6 +414,10 @@ function Update-Definition
      {
 
         $Definitions = Get-Content "C:\Detect-Crypto\ransomware_identifiers.txt"
+        $LastFiveLines = Get-Content ".\filegroup.xml" | Select-Object -last 5
+        $FirstEightLines = Get-Content ".\filegroup.xml" | Select-Object -first 8
+        $FirstEightLines | Out-File ".\filegroup.xml"
+
         foreach ($item in $Definitions) 
         {
 
@@ -421,17 +425,14 @@ function Update-Definition
            $List = $Group.IncludePattern + $Item
 
            Set-FsrmFileGroup -Name 'Detect-Crypto' -IncludePattern @($List)
-
-          $LastFiveLines = Get-Content ".\filegroup.xml" | Select-Object -last 5
-          $FirstEightLines = Get-Content ".\filegroup.xml" | Select-Object -first 8
-
-          $FirstEightLines | Out-File ".\filegroup.xml"
     
           $formattedline = $item.replace(' ','%20')
           $InsertString = "<Pattern PatternValue = '" + $formattedline + "' ></Pattern>"
-          $InsertString | Out-File ".\filegroup.xml" -append  
-          $LastFiveLines | Out-File ".\filegroup.xml" -append
+          $InsertString | Out-File -append ".\filegroup.xml"  
+          
         }
+
+        $LastFiveLines | Out-File -append ".\filegroup.xml" 
         Write-Host ''
         Write-Host 'Definitions Added'  -ForegroundColor Green
         Write-Host ''
